@@ -1,0 +1,17 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: research-agent-postgres
+    environment:
+      POSTGRES_USER: research_agent
+      POSTGRES_PASSWORD: research_agent
+      POSTGRES_DB: research_agent
+    ports:
+      # host port 5442 (not the default 5432) to avoid clashing with any
+      # other local Postgres you might already have running
+      - "5442:5432"
+    volumes:
+      - research_agent_pgdata:/var/lib/postgresql/data
+
+volumes:
+  research_agent_pgdata:
